@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleApp1.Models.Agreement;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,6 @@ namespace testConsole
 {
     public interface IStorageService
     {
-        Task<byte[]> GetFileAsync(string name);
-        Task PutFileAsync(string name, byte[] file);
+        Task PostAgreementAsync(Agreement[] agreements);        
     }
 }

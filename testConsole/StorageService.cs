@@ -1,6 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ConsoleApp1.Models.Agreement;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace testConsole
 {
@@ -8,11 +12,15 @@ namespace testConsole
     {
         private static readonly StorageService _storage = new StorageService();
 
-        //private readonly SqliteContext _dbContext;
+        private readonly SqliteContext _dbContext = new SqliteContext();
 
         private StorageService()
         {
             //_dbContext = new SqliteContext();
+            _dbContext.AgreementOrgs.Load();
+            _dbContext.Agreements.Load();
+            _dbContext.Bos.Load();
+            _dbContext.Schedules.Load();
         }
 
         public static StorageService GetInstance()
@@ -20,25 +28,22 @@ namespace testConsole
             return _storage;
         }
 
-        public async Task<byte[]> GetFileAsync(string name)
+        public async Task PostAgreementAsync(Agreement[] agreements)
         {
-            byte[] result;
-            using (var _dbContext = new SqliteContext())
+            foreach (var s in agreements)
             {
-                result = (_dbContext.Files.FirstOrDefault(p => p.Name == name)).File;
+                _dbContext.Agreements.Add(s);
+                try
+                {
+                    await _dbContext.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    _dbContext.Agreements.Remove(s);
+                }
             }
-            return result;
-        }
-
-        public async Task PutFileAsync(string name, byte[] file)
-        {
-            using (var _dbContext = new SqliteContext())
-            {
-                var fileModel = new FileModel() { Name = name, File = file };
-                _dbContext.Files.Add(fileModel);
-                _dbContext.SaveChanges();
-            }
-        
+            await _dbContext.SaveChangesAsync();
         }
 
     }

@@ -9,29 +9,15 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:50001/?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:50001/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:50001/?xsd=xsd2" namespace="http://schemas.microsoft.com/Message" />
+      <xsd:import schemaLocation="http://localhost:50001/?xsd=xsd1" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:50001/?xsd=xsd0" namespace="http://schemas.microsoft.com/Message" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IFileService_DownLoad_InputMessage">
-    <wsdl:part name="parameters" element="tns:DownLoad" />
-  </wsdl:message>
-  <wsdl:message name="IFileService_DownLoad_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DownLoadResponse" />
-  </wsdl:message>
   <wsdl:message name="FileType">
     <wsdl:part name="parameters" element="tns:FileType" />
   </wsdl:message>
-  <wsdl:message name="FileType_Headers">
-    <wsdl:part name="NameFileValue" element="tns:NameFileValue" />
-  </wsdl:message>
   <wsdl:message name="IFileService_Upload_OutputMessage" />
   <wsdl:portType name="IFileService">
-    <wsdl:operation name="DownLoad">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFileService/DownLoad" message="tns:IFileService_DownLoad_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFileService/DownLoadResponse" message="tns:IFileService_DownLoad_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="Upload">
       <wsdl:input wsaw:Action="http://tempuri.org/IFileService/Upload" name="FileType" message="tns:FileType" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFileService/UploadResponse" message="tns:IFileService_Upload_OutputMessage" />
@@ -40,19 +26,9 @@
   <wsdl:binding name="BasicHttpBinding_IFileService" type="tns:IFileService">
     <wsp:PolicyReference URI="#BasicHttpBinding_IFileService_policy" />
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="DownLoad">
-      <soap:operation soapAction="http://tempuri.org/IFileService/DownLoad" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="Upload">
       <soap:operation soapAction="http://tempuri.org/IFileService/Upload" style="document" />
       <wsdl:input name="FileType">
-        <soap:header message="tns:FileType_Headers" part="NameFileValue" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output>

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
@@ -9,8 +10,8 @@ namespace ServiceFileManager
     public interface IFileService
     {
 
-        [OperationContract]
-        Task<Stream> DownLoad(string fileName);
+        //[OperationContract]
+        //Task<Stream> DownLoad(string fileName);
 
         [OperationContract]
         Task Upload(FileType composite);
@@ -20,15 +21,6 @@ namespace ServiceFileManager
     [MessageContract]
     public class FileType
     {
-        private string nameFileValue ;
-
-        [MessageHeader]
-        public string NameFileValue
-        {
-            get { return nameFileValue; }
-            set { nameFileValue = value; }
-        }
-
         [MessageBodyMember]
         public Stream FileValue { get; set; }
     }

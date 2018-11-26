@@ -15,12 +15,6 @@ namespace ConsoleApp1.FileServiceClient {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FileServiceClient.IFileService")]
     public interface IFileService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/DownLoad", ReplyAction="http://tempuri.org/IFileService/DownLoadResponse")]
-        System.IO.Stream DownLoad(string fileName);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/DownLoad", ReplyAction="http://tempuri.org/IFileService/DownLoadResponse")]
-        System.Threading.Tasks.Task<System.IO.Stream> DownLoadAsync(string fileName);
-        
         // CODEGEN: Generating message contract since the operation Upload is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/Upload", ReplyAction="http://tempuri.org/IFileService/UploadResponse")]
         ConsoleApp1.FileServiceClient.UploadResponse Upload(ConsoleApp1.FileServiceClient.FileType request);
@@ -35,17 +29,13 @@ namespace ConsoleApp1.FileServiceClient {
     [System.ServiceModel.MessageContractAttribute(WrapperName="FileType", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
     public partial class FileType {
         
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
-        public string NameFileValue;
-        
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public System.IO.Stream FileValue;
         
         public FileType() {
         }
         
-        public FileType(string NameFileValue, System.IO.Stream FileValue) {
-            this.NameFileValue = NameFileValue;
+        public FileType(System.IO.Stream FileValue) {
             this.FileValue = FileValue;
         }
     }
@@ -87,22 +77,13 @@ namespace ConsoleApp1.FileServiceClient {
                 base(binding, remoteAddress) {
         }
         
-        public System.IO.Stream DownLoad(string fileName) {
-            return base.Channel.DownLoad(fileName);
-        }
-        
-        public System.Threading.Tasks.Task<System.IO.Stream> DownLoadAsync(string fileName) {
-            return base.Channel.DownLoadAsync(fileName);
-        }
-        
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         ConsoleApp1.FileServiceClient.UploadResponse ConsoleApp1.FileServiceClient.IFileService.Upload(ConsoleApp1.FileServiceClient.FileType request) {
             return base.Channel.Upload(request);
         }
         
-        public void Upload(string NameFileValue, System.IO.Stream FileValue) {
+        public void Upload(System.IO.Stream FileValue) {
             ConsoleApp1.FileServiceClient.FileType inValue = new ConsoleApp1.FileServiceClient.FileType();
-            inValue.NameFileValue = NameFileValue;
             inValue.FileValue = FileValue;
             ConsoleApp1.FileServiceClient.UploadResponse retVal = ((ConsoleApp1.FileServiceClient.IFileService)(this)).Upload(inValue);
         }
@@ -112,9 +93,8 @@ namespace ConsoleApp1.FileServiceClient {
             return base.Channel.UploadAsync(request);
         }
         
-        public System.Threading.Tasks.Task<ConsoleApp1.FileServiceClient.UploadResponse> UploadAsync(string NameFileValue, System.IO.Stream FileValue) {
+        public System.Threading.Tasks.Task<ConsoleApp1.FileServiceClient.UploadResponse> UploadAsync(System.IO.Stream FileValue) {
             ConsoleApp1.FileServiceClient.FileType inValue = new ConsoleApp1.FileServiceClient.FileType();
-            inValue.NameFileValue = NameFileValue;
             inValue.FileValue = FileValue;
             return ((ConsoleApp1.FileServiceClient.IFileService)(this)).UploadAsync(inValue);
         }
