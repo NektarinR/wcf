@@ -1,0 +1,40 @@
+POST /Service HTTP/1.1
+Host: localhost:50001
+Accept-Encoding:  gzip
+Accept:  text/xml, text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+SOAPAction: http://tempuri.org/IFileService/Upload
+Transfer-Encoding:  chunked
+Content-Type: Multipart/Related; start-info="text/xml"; type="application/xop+xml"; boundary="----=_Part_0_8954178.1441545043454"
+cache-control: no-cache
+Postman-Token: e8daa0a6-5523-46f8-8ea0-c90c1c3d7178
+
+------=_Part_0_8954178.1441545043454
+Content-Type: application/xop+xml; charset=utf-8; type="text/xml"
+
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+    <s:Header >
+
+    </s:Header>
+    <s:Body>
+    	<ns2:UpdateRequest>
+	        <FileType>
+	            <FileValue>
+	                <xop:Include xmlns:xop="http://www.w3.org/2004/08/xop/include"
+	                    href="cid:97b1c4a1-c82d-4fd3-99a2-d234edbc32ec@github.com" />
+	            </FileValue>
+	        </FileType>
+        </<ns2:UpdateRequest>
+    </s:Body>
+</s:Envelope>
+
+------=_Part_0_8954178.1441545043454
+Content-Type: application/octet-stream
+Content-ID: <97b1c4a1-c82d-4fd3-99a2-d234edbc32ec@github.com>
+Content-Transfer-Encoding: binary
+
+PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxyZXR1cm4+DQogIDxBR1JFRU1FTlQgS0FETT0iMDc1IiBidWRnZXRJZD0iM
+TAwMTAwMDAwMDA0MCIgYnVkZ2V0U3VtbT0iMTkzMDA2NjkwLjYiIGNhcHRpb249ItCU0LXQv9Cw0YDRgtCw0LzQtdC90YIg0L7QsdGA0LDQt9C+0L
+LQsNC90LjRjyDQs9C+0YDQvtC00LAg0JzQvtGB0LrQstGLIiBkYXRlRnJvbT0iMjAxNC0wOS0wMSAwMDowMDowMCIgZGF0ZVRvPSIyMDE1LTA4LTM
+xIDAwOjAwOjAwIiBpZD0iMTAwMTAwMDAwMjIyOCI+DQogICAgPEFHUkVFTUVOVF9PUkcgYWdyZWVtZW50U3VtbT0iMTk3NDU0NDgiIGJ1ZGdldFJl
+cXNTdW1tPSIxMzE2MzYzMiIgY2FwdGlvbj0i0JPQkdCe0KMg0KbQlNCiICZxdW90O9Cd0LAg0JzQvtC70L7QtNGG0L7QstCwJnF1b3Q7IiBpZD0iMT
+AwMTAwMDAwMTcyOSIgc3Vic2lkeVN1bW09IjE5NzQ1NDQ4Ij4NCiAgICAgIDxTQ0hFR
